@@ -1,20 +1,3 @@
-#!/usr/bin/env python
-# Copyright 2008 Brett Slatkin
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-__author__ = "Brett Slatkin (bslatkin@gmail.com)"
-
 import datetime
 import hashlib
 import logging
@@ -32,8 +15,6 @@ from google.appengine.ext.webapp import template
 from google.appengine.runtime import apiproxy_errors
 
 import transform_content
-
-################################################################################
 
 DEBUG = False
 EXPIRATION_DELTA_SECONDS = 3600
@@ -72,14 +53,10 @@ MAX_CONTENT_SIZE = 10 ** 6
 
 MAX_URL_DISPLAY_LENGTH = 50
 
-################################################################################
-
 def get_url_key_name(url):
   url_hash = hashlib.sha256()
   url_hash.update(url)
   return "hash_" + url_hash.hexdigest()
-
-################################################################################
 
 class EntryPoint(db.Model):
   translated_address = db.TextProperty(required=True)
@@ -156,8 +133,6 @@ class MirroredContent(object):
                     'original_url = "%s"', key_name, mirrored_url)
 
     return new_content
-
-################################################################################
 
 class BaseHandler(webapp2.RequestHandler):
   def get_relative_url(self):
